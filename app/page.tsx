@@ -35,16 +35,16 @@ export default function HomePage() {
         color: 'white', marginTop: '70px', position: 'relative',
       }}>
         <div>
-          <h1 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '4rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '2px', color: '#fff5f7', textShadow: '2px 2px 8px rgba(80,20,60,0.3)' }}>
+          <h1 className="hero-title" style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '4rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '2px', color: '#fff5f7', textShadow: '2px 2px 8px rgba(80,20,60,0.3)' }}>
             SEEYA LUXE
           </h1>
-          <h2 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 700, color: '#0a0405', textShadow: '2px 2px 8px rgba(80,20,60,0.3)' }}>
+          <h2 className="hero-h2" style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 700, color: '#0a0405', textShadow: '2px 2px 8px rgba(80,20,60,0.3)' }}>
             The Standard of Ghanaian Elegance
           </h2>
-          <p style={{ fontSize: '1.5rem', marginBottom: '2rem', fontWeight: 300, letterSpacing: '1px', color: '#fff5f7', textShadow: '1px 1px 5px rgba(80,20,60,0.2)' }}>
+          <p className="hero-tagline" style={{ fontSize: '1.5rem', marginBottom: '2rem', fontWeight: 300, letterSpacing: '1px', color: '#fff5f7', textShadow: '1px 1px 5px rgba(80,20,60,0.2)' }}>
             Curated luxury delivered to your doorstep
           </p>
-          <a href="#products" style={{
+          <a href="#products" className="hero-btn" style={{
             display: 'inline-block', padding: '1.3rem 3.5rem', background: '#fff5f7', color: '#c084d9',
             textDecoration: 'none', fontWeight: 800, letterSpacing: '1.5px', fontSize: '1.1rem',
             transition: 'all 0.3s ease', textTransform: 'uppercase', boxShadow: '0 8px 25px rgba(0,0,0,0.25)',
@@ -58,9 +58,9 @@ export default function HomePage() {
       </section>
 
       {/* About */}
-      <section id="about" style={{ padding: '6rem 2rem', background: 'white', textAlign: 'center' }}>
+      <section id="about" className="mobile-section" style={{ padding: '6rem 2rem', background: 'white', textAlign: 'center' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <h2 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--primary-dark)', fontWeight: 900 }}>About SEEYA LUXE</h2>
+          <h2 className="section-heading" style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--primary-dark)', fontWeight: 900 }}>About SEEYA LUXE</h2>
           <p style={{ fontSize: '1.1rem', color: 'var(--text-dark)', lineHeight: 1.8, marginBottom: '1rem' }}>
             We are a Ghanaian-based luxury brand dedicated to delivering premium quality products that celebrate local craftsmanship and African excellence.
           </p>
@@ -85,8 +85,8 @@ export default function HomePage() {
       <ProductsSection />
 
       {/* How It Works */}
-      <section id="how-it-works" style={{ padding: '4rem 2rem 2rem', background: 'white' }}>
-        <h2 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '3rem', color: 'var(--primary-dark)', fontWeight: 900, textAlign: 'center' }}>How It Works</h2>
+      <section id="how-it-works" className="mobile-section" style={{ padding: '4rem 2rem 2rem', background: 'white' }}>
+        <h2 className="section-heading" style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '3rem', color: 'var(--primary-dark)', fontWeight: 900, textAlign: 'center' }}>How It Works</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '3rem', maxWidth: 1200, margin: '0 auto' }}>
           {[
             ['01', 'Browse Collection', 'Explore our carefully curated selection of luxury products.'],
@@ -105,7 +105,7 @@ export default function HomePage() {
 
       {/* Testimonials */}
       <section style={{ padding: '2rem 2rem 4rem', background: 'white' }}>
-        <h2 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '3rem', color: 'var(--primary-dark)', fontWeight: 900, textAlign: 'center' }}>What Our Customers Say</h2>
+        <h2 className="section-heading" style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.5rem', marginBottom: '3rem', color: 'var(--primary-dark)', fontWeight: 900, textAlign: 'center' }}>What Our Customers Say</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: 1200, margin: '0 auto' }}>
           {[
             { text: "Absolutely stunning pieces! The quality is exceptional and the delivery was so fast. SEEYA LUXE has become my go-to for luxury accessories.", name: 'Ama Osei', location: 'Accra, Ghana' },
@@ -124,7 +124,7 @@ export default function HomePage() {
       </section>
 
       {/* Trust Badges */}
-      <section style={{ display: 'flex', justifyContent: 'center', gap: '4rem', padding: '2.5rem 2rem', flexWrap: 'wrap', background: 'white', borderTop: '1px solid #f0e8ec', borderBottom: '1px solid #f0e8ec' }}>
+      <section className="trust-badges" style={{ display: 'flex', justifyContent: 'center', gap: '4rem', padding: '2.5rem 2rem', flexWrap: 'wrap', background: 'white', borderTop: '1px solid #f0e8ec', borderBottom: '1px solid #f0e8ec' }}>
         {[
           { label: 'Secure Payment', svg: <svg viewBox="0 0 24 24" fill="none" stroke="#c084a0" strokeWidth="1.8" style={{ width: 44, height: 44 }}><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.35C16.5 22.15 20 17.25 20 12V6L12 2z" /></svg> },
           { label: 'Fast Delivery', svg: <svg viewBox="0 0 24 24" fill="none" stroke="#c084a0" strokeWidth="1.8" style={{ width: 44, height: 44 }}><rect x="1" y="3" width="15" height="13" rx="1" /><path d="M16 8h4l3 5v3h-7V8z" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg> },
@@ -142,7 +142,7 @@ export default function HomePage() {
       <section style={{ background: 'linear-gradient(135deg, #7a5c7a 0%, #9d7b9f 50%, #8a6b8a 100%)', padding: '5rem 2rem', textAlign: 'center', color: 'white' }}>
         <h2 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '2.8rem', marginBottom: '1rem', fontWeight: 700 }}>Join Our VIP List</h2>
         <p style={{ marginBottom: '2.5rem', fontSize: '1.1rem', opacity: 0.9 }}>Subscribe for exclusive offers, new arrivals, and luxury insights</p>
-        <form onSubmit={e => { e.preventDefault(); const email = (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value; alert(`Thank you for subscribing! We'll send exclusive updates to ${email}`); (e.target as HTMLFormElement).reset(); }} style={{ display: 'flex', maxWidth: 560, margin: '0 auto', gap: 0, boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+        <form className="newsletter-form" onSubmit={e => { e.preventDefault(); const email = (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value; alert(`Thank you for subscribing! We'll send exclusive updates to ${email}`); (e.target as HTMLFormElement).reset(); }} style={{ display: 'flex', maxWidth: 560, margin: '0 auto', gap: 0, boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
           <input name="email" type="email" required placeholder="Enter your email address" style={{ flex: 1, padding: '1.1rem 1.5rem', border: 'none', fontSize: '1rem', outline: 'none', borderRadius: 0, background: 'white', color: '#333' }} />
           <button type="submit" style={{ padding: '1.1rem 2rem', background: '#b07a8a', color: 'white', border: 'none', fontWeight: 700, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', borderRadius: 0 }}>
             Subscribe

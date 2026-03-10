@@ -33,3 +33,35 @@ body {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
+
+/* ── Mobile utilities ──────────────────────────────────── */
+.desktop-only { display: flex !important; }
+.mobile-only  { display: none  !important; }
+
+@media (max-width: 768px) {
+  .desktop-only { display: none  !important; }
+  .mobile-only  { display: flex  !important; }
+
+  /* Hero text */
+  .hero-title    { font-size: 2.2rem !important; letter-spacing: 1px !important; }
+  .hero-h2       { font-size: 1.3rem !important; }
+  .hero-tagline  { font-size: 1rem  !important; }
+  .hero-btn      { padding: 1rem 2rem !important; font-size: 0.95rem !important; }
+
+  /* Section headings */
+  .section-heading { font-size: 1.8rem !important; }
+
+  /* Newsletter form — stack on mobile */
+  .newsletter-form { flex-direction: column !important; }
+  .newsletter-form input  { width: 100% !important; }
+  .newsletter-form button { width: 100% !important; }
+
+  /* Reduce large section padding */
+  .mobile-section { padding: 3rem 1rem !important; }
+
+  /* Trust badges — tighter gap */
+  .trust-badges { gap: 1.5rem !important; padding: 2rem 1rem !important; }
+
+  /* Product grid — allow smaller cards */
+  .product-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important; gap: 1.5rem !important; }
+}

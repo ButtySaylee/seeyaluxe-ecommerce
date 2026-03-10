@@ -72,7 +72,7 @@ export default function ProductsSection() {
         {filtered.length === 0 ? (
           <p style={{ textAlign: 'center', padding: '3rem', color: '#999' }}>No products found.</p>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginTop: '2rem' }}>
+          <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', marginTop: '2rem' }}>
             {filtered.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
