@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --primary-dark: #6b5b6e;
+  --gold-accent: #d4a5a5;
+  --white: #ffffff;
+  --light-gray: #faf8fa;
+  --text-dark: #5a4a5a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-montserrat, 'Montserrat', sans-serif);
+  color: var(--text-dark);
+  background-color: var(--white);
+  line-height: 1.6;
+}
+
+@keyframes fadeInPage {
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
