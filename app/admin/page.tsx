@@ -10,7 +10,7 @@ const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || '
 const CLOUDINARY_UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || '';
 
 type Tab = 'add' | 'manage';
-type Category = 'earrings' | 'footwear' | 'bags';
+type Category = 'earrings' | 'footwear' | 'bags' | 'others';
 type FilterCategory = 'all' | Category;
 
 const emptyForm = { name: '', category: '' as Category | '', price: '', description: '', imageUrl: '' };
@@ -223,6 +223,7 @@ export default function AdminPage() {
                   <option value="earrings">Earrings</option>
                   <option value="footwear">Footwear</option>
                   <option value="bags">Bags</option>
+                  <option value="others">Others</option>
                 </select>
               </div>
 
@@ -266,7 +267,7 @@ export default function AdminPage() {
               style={{ width: '100%', padding: '0.8rem', border: '2px solid #ddd', fontSize: '1rem', outline: 'none', fontFamily: 'inherit', marginBottom: '1rem' }} />
 
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-              {(['all', 'earrings', 'footwear', 'bags'] as FilterCategory[]).map(cat => (
+              {(['all', 'earrings', 'footwear', 'bags', 'others'] as FilterCategory[]).map(cat => (
                 <button key={cat} style={filterBtnStyle(filterCat === cat)} onClick={() => setFilterCat(cat)}>
                   {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </button>

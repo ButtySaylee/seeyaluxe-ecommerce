@@ -10,7 +10,7 @@ export default function CartModal() {
     if (items.length === 0) return;
     const orderText = items.map(i => `• ${i.name} x${i.quantity} — ₵${(i.price * i.quantity).toFixed(2)}`).join('\n');
     const message = encodeURIComponent(`Hello SEEYA LUXE! I'd like to order:\n\n${orderText}\n\nTotal: ₵${totalPrice.toFixed(2)}\n\nPlease confirm availability and payment details.`);
-    window.open(`https://wa.me/233XXXXXXXXX?text=${message}`, '_blank');
+    window.open(`https://wa.me/233555008134?text=${message}`, '_blank');
   };
 
   if (!isOpen) return null;

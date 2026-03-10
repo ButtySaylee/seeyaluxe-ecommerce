@@ -5,7 +5,7 @@ import { supabase, Product } from '@/lib/supabase';
 import { staticProducts } from '@/lib/products';
 import ProductCard from './ProductCard';
 
-type Category = 'all' | 'earrings' | 'footwear' | 'bags';
+type Category = 'all' | 'earrings' | 'footwear' | 'bags' | 'others';
 
 export default function ProductsSection() {
   const [filter, setFilter] = useState<Category>('all');
@@ -55,7 +55,7 @@ export default function ProductsSection() {
         </h2>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-          {(['all', 'earrings', 'footwear', 'bags'] as Category[]).map(cat => (
+          {(['all', 'earrings', 'footwear', 'bags', 'others'] as Category[]).map(cat => (
             <button key={cat} style={btnStyle(filter === cat)} onClick={() => setFilter(cat)}>
               {cat === 'all' ? 'All Products' : cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
