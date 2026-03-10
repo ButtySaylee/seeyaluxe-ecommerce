@@ -32,9 +32,17 @@ export default function HomePage() {
         height: '100vh',
         background: 'linear-gradient(135deg, #ffc0cb 0%, #ffb6d9 25%, #dda0d9 50%, #c084d9 75%, #b28dd9 100%)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
-        color: 'white', marginTop: '70px', position: 'relative',
+        color: 'white', marginTop: '70px', position: 'relative', overflow: 'hidden',
       }}>
-        <div>
+        {process.env.NEXT_PUBLIC_HERO_IMAGE_URL && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={process.env.NEXT_PUBLIC_HERO_IMAGE_URL}
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.35 }}
+          />
+        )}
+        <div style={{ position: 'relative', zIndex: 1, padding: '0 1rem' }}>
           <h1 className="hero-title" style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '4rem', fontWeight: 900, marginBottom: '1rem', letterSpacing: '2px', color: '#fff5f7', textShadow: '2px 2px 8px rgba(80,20,60,0.3)' }}>
             SEEYA LUXE
           </h1>
