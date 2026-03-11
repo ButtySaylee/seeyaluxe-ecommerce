@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { CartProvider } from '@/components/CartProvider';
 import Header from '@/components/Header';
 import CartModal from '@/components/CartModal';
+import PromoBanner from '@/components/PromoBanner';
 import ProductsSection from '@/components/ProductsSection';
 import Footer from '@/components/Footer';
 
@@ -19,20 +20,16 @@ export default function HomePage() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   return (
     <CartProvider>
-      {/* Promo Banner */}
-      <div style={{ background: 'linear-gradient(135deg, var(--primary-dark), #9d7b9f)', color: 'white', textAlign: 'center', padding: '0.8rem 1rem', fontSize: '0.9rem', position: 'relative', zIndex: 999 }}>
-        <strong style={{ color: 'var(--gold-accent)' }}>FREE DELIVERY</strong> on all orders over ₵1,000 | Shop Now &amp; Pay with Mobile Money!
-      </div>
-
       <Header />
       <CartModal />
+      <PromoBanner />
 
       {/* Hero */}
       <section id="hero" style={{
         height: '100vh',
         background: 'linear-gradient(135deg, #ffc0cb 0%, #ffb6d9 25%, #dda0d9 50%, #c084d9 75%, #b28dd9 100%)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
-        color: 'white', marginTop: '70px', position: 'relative', overflow: 'hidden',
+        color: 'white', marginTop: '112px', position: 'relative', overflow: 'hidden',
       }}>
         {process.env.NEXT_PUBLIC_HERO_IMAGE_URL && (
           // eslint-disable-next-line @next/next/no-img-element

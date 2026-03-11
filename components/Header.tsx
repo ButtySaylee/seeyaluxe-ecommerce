@@ -7,14 +7,18 @@ import { useCart } from './CartProvider';
 export default function Header() {
   const { totalItems, setCartOpen } = useCart();
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const headerBg = mounted && scrolled ? 'rgba(26,26,26,0.98)' : 'rgba(26,26,26,0.95)';
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +39,7 @@ export default function Header() {
     <>
       <header style={{
         position: 'fixed', top: 0, width: '100%',
-        backgroundColor: scrolled ? 'rgba(26,26,26,0.98)' : 'rgba(26,26,26,0.95)',
+        backgroundColor: headerBg,
         padding: '1rem 1.5rem', zIndex: 1000,
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         boxShadow: '0 2px 20px rgba(0,0,0,0.1)', transition: 'background-color 0.3s ease',

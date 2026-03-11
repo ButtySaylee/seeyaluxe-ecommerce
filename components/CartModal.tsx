@@ -4,10 +4,48 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useCart } from './CartProvider';
 
+const DISCOUNT_CODE = 'LUXE10';
+const DISCOUNT_PCT = 0.10;
+const PROMO_START = new Date('2026-03-15T00:00:00');
+const PROMO_END   = new Date('2026-03-20T23:59:59');
+
+function isPromoActive() {
+  const now = new Date();
+  return now >= PROMO_START && now <= PROMO_END;
+}
+
 export default function CartModal() {
   const { items, isOpen, setCartOpen, removeFromCart, updateQuantity, totalPrice } = useCart();
   const [step, setStep] = useState<'cart' | 'review'>('cart');
   const [orderRef] = useState(() => 'SL-' + Math.random().toString(36).substring(2, 8).toUpperCase());
+  const [codeInput, setCodeInput] = useState('');
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [codeError, setCodeError] = useState('');
+
+  const discountAmount = discountApplied ? totalPrice * DISCOUNT_PCT : 0;
+  const finalTotal = totalPrice - discountAmount;
+
+  const applyCode = () => {
+    const code = codeInput.trim().toUpperCase();
+    if (code !== DISCOUNT_CODE) {
+      setCodeError('Invalid code. Please try again.');
+      setDiscountApplied(false);
+      return;
+    }
+    if (!isPromoActive()) {
+      setCodeError('This code is only valid from 15th – 20th March 2026.');
+      setDiscountApplied(false);
+      return;
+    }
+    setDiscountApplied(true);
+    setCodeError('');
+  };
+
+  const removeCode = () => {
+    setDiscountApplied(false);
+    setCodeInput('');
+    setCodeError('');
+  };
 
   const proceedToReview = () => {
     if (items.length === 0) return;
@@ -16,8 +54,9 @@ export default function CartModal() {
 
   const confirmCheckout = () => {
     const orderText = items.map(i => `• ${i.name} x${i.quantity} — ₵${(i.price * i.quantity).toFixed(2)}`).join('\n');
+    const discountLine = discountApplied ? `\nDiscount (LUXE10 -10%): -₵${discountAmount.toFixed(2)}` : '';
     const message = encodeURIComponent(
-      `Hello SEEYA LUXE! I'd like to order:\n\n${orderText}\n\nTotal: ₵${totalPrice.toFixed(2)}\n\nOrder Ref: ${orderRef}\n\nPlease confirm availability and payment details.`
+      `Hello SEEYA LUXE! I'd like to order:\n\n${orderText}\n\nSubtotal: ₵${totalPrice.toFixed(2)}${discountLine}\nTotal: ₵${finalTotal.toFixed(2)}\n\nOrder Ref: ${orderRef}\n\nPlease confirm availability and payment details.`
     );
     window.open(`https://wa.me/233555008134?text=${message}`, '_blank');
     setCartOpen(false);
@@ -77,10 +116,50 @@ export default function CartModal() {
             </div>
             {items.length > 0 && (
               <div style={{ borderTop: '2px solid var(--gold-accent)', padding: '1.5rem', flexShrink: 0 }}>
+
+                {/* Promo code input */}
+                {!discountApplied ? (
+                  <div style={{ marginBottom: '1rem' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <input
+                        type="text"
+                        value={codeInput}
+                        onChange={e => { setCodeInput(e.target.value); setCodeError(''); }}
+                        onKeyDown={e => e.key === 'Enter' && applyCode()}
+                        placeholder="Promo code (e.g. LUXE10)"
+                        style={{ flex: 1, padding: '0.6rem 0.8rem', border: '1px solid #ddd', fontSize: '0.85rem', outline: 'none', color: 'var(--text-dark)' }}
+                      />
+                      <button onClick={applyCode}
+                        style={{ padding: '0.6rem 1rem', background: 'var(--primary-dark)', color: 'white', border: 'none', fontWeight: 600, cursor: 'pointer', fontSize: '0.85rem', whiteSpace: 'nowrap' }}
+                      >Apply</button>
+                    </div>
+                    {codeError && <p style={{ color: '#e74c3c', fontSize: '0.8rem', marginTop: '0.4rem' }}>{codeError}</p>}
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f0faf3', border: '1px solid #25D366', padding: '0.6rem 0.8rem', marginBottom: '1rem', borderRadius: '3px' }}>
+                    <span style={{ fontSize: '0.85rem', color: '#1a7a3a', fontWeight: 600 }}>✓ LUXE10 — 10% off applied!</span>
+                    <button onClick={removeCode} style={{ background: 'none', border: 'none', color: '#999', cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1 }}>×</button>
+                  </div>
+                )}
+
+                {/* Totals */}
+                {discountApplied && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', marginBottom: '0.4rem', color: '#666' }}>
+                    <span>Subtotal:</span>
+                    <span>₵{totalPrice.toFixed(2)}</span>
+                  </div>
+                )}
+                {discountApplied && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', marginBottom: '0.6rem', color: '#1a7a3a', fontWeight: 600 }}>
+                    <span>Discount (10%):</span>
+                    <span>−₵{discountAmount.toFixed(2)}</span>
+                  </div>
+                )}
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--primary-dark)' }}>
                   <span>Total:</span>
-                  <span style={{ color: 'var(--gold-accent)' }}>₵{totalPrice.toFixed(2)}</span>
+                  <span style={{ color: 'var(--gold-accent)' }}>₵{finalTotal.toFixed(2)}</span>
                 </div>
+
                 <button onClick={proceedToReview}
                   style={{ width: '100%', padding: '1rem', background: 'var(--primary-dark)', color: 'white', border: 'none', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem' }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'var(--gold-accent)'; e.currentTarget.style.color = 'var(--primary-dark)'; }}
@@ -116,8 +195,13 @@ export default function CartModal() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.2rem', fontWeight: 700, color: 'var(--primary-dark)', padding: '0.5rem 0', borderTop: '2px solid var(--gold-accent)' }}>
                 <span>Total</span>
-                <span style={{ color: 'var(--gold-accent)' }}>₵{totalPrice.toFixed(2)}</span>
+                <span style={{ color: 'var(--gold-accent)' }}>₵{finalTotal.toFixed(2)}</span>
               </div>
+              {discountApplied && (
+                <div style={{ marginTop: '0.5rem', textAlign: 'center', fontSize: '0.8rem', color: '#1a7a3a', fontWeight: 600 }}>
+                  ✓ LUXE10 applied — you saved ₵{discountAmount.toFixed(2)}!
+                </div>
+              )}
 
               <p style={{ marginTop: '1.5rem', fontSize: '0.85rem', color: '#888', lineHeight: 1.7, textAlign: 'center' }}>
                 Clicking below will open WhatsApp with your full order. Our team will confirm availability and share payment details.
