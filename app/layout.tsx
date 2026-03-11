@@ -3,6 +3,7 @@ import { Playfair_Display, Montserrat } from 'next/font/google';
 import './globals.css';
 import ScrollToTop from './ScrollToTop';
 import ServiceWorkerRegistration from './ServiceWorkerRegistration';
+import InstallPrompt from '@/components/InstallPrompt';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <body><ScrollToTop /><ServiceWorkerRegistration />{children}</body>
+      <body><ScrollToTop /><ServiceWorkerRegistration /><InstallPrompt />{children}</body>
     </html>
   );
 }

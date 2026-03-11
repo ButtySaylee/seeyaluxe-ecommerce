@@ -12,7 +12,52 @@
   "lang": "en",
   "dir": "ltr",
   "categories": ["shopping", "lifestyle"],
+  "serviceworker": {
+    "src": "/sw.js",
+    "scope": "/",
+    "type": "",
+    "update_via_cache": "none"
+  },
   "icons": [
+    { "src": "/icons/icon-72.png",  "sizes": "72x72",   "type": "image/png" },
+    { "src": "/icons/icon-96.png",  "sizes": "96x96",   "type": "image/png" },
+    { "src": "/icons/icon-128.png", "sizes": "128x128", "type": "image/png" },
+    { "src": "/icons/icon-144.png", "sizes": "144x144", "type": "image/png" },
+    { "src": "/icons/icon-152.png", "sizes": "152x152", "type": "image/png" },
+    { "src": "/icons/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-384.png", "sizes": "384x384", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "SEEYA LUXE — Shop luxury accessories on mobile"
+    },
+    {
+      "src": "/screenshots/screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "SEEYA LUXE — Shop luxury accessories on desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Collection",
+      "short_name": "Shop",
+      "description": "Browse our luxury collection",
+      "url": "/#products",
+      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "prefer_related_applications": false
+}
+
     { "src": "/icons/icon-72.png",  "sizes": "72x72",   "type": "image/png" },
     { "src": "/icons/icon-96.png",  "sizes": "96x96",   "type": "image/png" },
     { "src": "/icons/icon-128.png", "sizes": "128x128", "type": "image/png" },
