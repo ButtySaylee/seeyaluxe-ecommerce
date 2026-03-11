@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://seeyaluxeonlinestore.vercel.app'),
   title: 'SEEYA LUXE - Ghanaian Luxury Excellence',
   description: 'Premium luxury accessories — earrings, footwear & bags — curated for the African woman of distinction.',
-  manifest: '/manifest.webmanifest',
+  manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
