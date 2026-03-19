@@ -59,7 +59,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
-      <body><ScrollToTop /><ServiceWorkerRegistration /><InstallPrompt />{children}</body>
+      <body>
+        <ScrollToTop />
+        <ServiceWorkerRegistration />
+        <InstallPrompt />
+        {children}
+        <footer className="w-full py-4 text-center border-t border-gray-200 mt-8">
+          <p className="text-sm text-gray-600">
+            Built by{' '}
+            <a
+              href="https://butty-portfolio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#6b5b6e] hover:text-[#5a4a5d] font-medium transition-colors duration-200"
+            >
+              Butty Saylee
+            </a>
+          </p>
+        </footer>
+      </body>
     </html>
   );
 }
