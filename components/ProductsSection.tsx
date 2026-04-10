@@ -1,47 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase, Product } from '@/lib/supabase';
 import { staticProducts } from '@/lib/products';
 import ProductCard from './ProductCard';
 
-type Category = 'all' | 'earrings' | 'footwear' | 'bags' | 'others';
-
-const shimmer = {
-  background: 'linear-gradient(90deg, #ede9ee 25%, #e0d8e2 50%, #ede9ee 75%)',
-  backgroundSize: '200% 100%',
-  animation: 'shimmer 1.5s infinite',
-} as React.CSSProperties;
-
-function SkeletonCard() {
-  return (
-    <div style={{ background: 'white', overflow: 'hidden', boxShadow: '0 5px 20px rgba(0,0,0,0.07)' }}>
-      <div style={{ height: 300, ...shimmer }} />
-      <div style={{ padding: '2rem' }}>
-        <div style={{ height: 22, borderRadius: 4, marginBottom: '1rem', ...shimmer }} />
-        <div style={{ height: 14, borderRadius: 4, marginBottom: '0.5rem', ...shimmer }} />
-        <div style={{ height: 14, width: '60%', borderRadius: 4, marginBottom: '1.5rem', ...shimmer }} />
-        <div style={{ height: 44, borderRadius: 4, ...shimmer }} />
-      </div>
-    </div>
-  );
-}
+type Category = 'all' | 'earrings' | 'footwear' | 'bags';
 
 export default function ProductsSection() {
   const [filter, setFilter] = useState<Category>('all');
   const [search, setSearch] = useState('');
   const [dbProducts, setDbProducts] = useState<Product[] | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase
       .from('products')
       .select('*')
       .order('created_at', { ascending: false })
-      .then(({ data }) => {
-        if (data && data.length > 0) setDbProducts(data);
-        setLoading(false);
-      });
+      .then(({ data }) => { if (data && data.length > 0) setDbProducts(data); });
   }, []);
 
   useEffect(() => {
@@ -79,7 +55,7 @@ export default function ProductsSection() {
         </h2>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-          {(['all', 'earrings', 'footwear', 'bags', 'others'] as Category[]).map(cat => (
+          {(['all', 'earrings', 'footwear', 'bags'] as Category[]).map(cat => (
             <button key={cat} style={btnStyle(filter === cat)} onClick={() => setFilter(cat)}>
               {cat === 'all' ? 'All Products' : cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
@@ -93,14 +69,10 @@ export default function ProductsSection() {
           </div>
         )}
 
-        {loading ? (
-          <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', marginTop: '2rem' }}>
-            {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
-          </div>
-        ) : filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <p style={{ textAlign: 'center', padding: '3rem', color: '#999' }}>No products found.</p>
         ) : (
-          <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', marginTop: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginTop: '2rem' }}>
             {filtered.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}

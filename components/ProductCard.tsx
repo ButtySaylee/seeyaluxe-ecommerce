@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { Product } from '@/lib/supabase';
 import { useCart } from './CartProvider';
 import { useState } from 'react';
@@ -16,9 +15,8 @@ export default function ProductCard({ product }: Props) {
   const [quickView, setQuickView] = useState(false);
   const imageUrl = (product.images && product.images[0]) || '/placeholder.svg';
 
-  const isStaticProduct = product.id.startsWith('static-');
   const handleAdd = () => {
-    if (!product.is_sold) addToCart({ id: product.id, name: product.name, price: product.price, image: imageUrl });
+    addToCart({ id: product.id, name: product.name, price: product.price, image: imageUrl });
   };
 
   return (
@@ -60,14 +58,7 @@ export default function ProductCard({ product }: Props) {
           </button>
         </div>
         <div style={{ padding: '2rem' }}>
-          <h3 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--primary-dark)' }}>
-            {isStaticProduct ? product.name : (
-              <Link href={`/products/${product.id}`} style={{ color: 'var(--primary-dark)', textDecoration: 'none' }}
-                onMouseEnter={e => e.currentTarget.style.color = 'var(--gold-accent)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'var(--primary-dark)'}
-              >{product.name}</Link>
-            )}
-          </h3>
+          <h3 style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '1.3rem', fontWeight: 700, marginBottom: '0.8rem', color: 'var(--primary-dark)' }}>{product.name}</h3>
           <p style={{ fontStyle: 'italic', color: '#666', fontSize: '0.9rem', marginBottom: '1.2rem', lineHeight: 1.6 }}>{product.description}</p>
           <p style={{ fontFamily: 'var(--font-playfair, serif)', fontSize: '1.6rem', color: 'var(--gold-accent)', fontWeight: 700, marginBottom: '1.5rem' }}>₵{product.price.toFixed(2)}</p>
           <button
@@ -83,25 +74,19 @@ export default function ProductCard({ product }: Props) {
           >
             {product.is_sold ? 'Sold Out' : 'Add to Cart'}
           </button>
-          {!isStaticProduct && (
-            <Link href={`/products/${product.id}`} style={{ display: 'block', textAlign: 'center', marginTop: '0.7rem', color: 'var(--text-dark)', fontSize: '0.82rem', textDecoration: 'none', opacity: 0.7, letterSpacing: '0.5px' }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = 'var(--primary-dark)'; }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = '0.7'; e.currentTarget.style.color = 'var(--text-dark)'; }}
-            >View full details →</Link>
-          )}
         </div>
       </div>
 
       {quickView && (
         <>
           <div onClick={() => setQuickView(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', zIndex: 3000 }} />
-          <div style={{
+          <div className="quick-view-modal" style={{
             position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
             background: 'white', maxWidth: 900, width: '90vw', maxHeight: '90vh', overflowY: 'auto',
             zIndex: 3001, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', padding: '2rem',
           }}>
             <button onClick={() => setQuickView(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', fontSize: '2rem', cursor: 'pointer', color: 'var(--primary-dark)', lineHeight: 1 }}>&times;</button>
-            <div style={{ position: 'relative', minHeight: 300 }}>
+            <div className="quick-view-image-wrap" style={{ position: 'relative', minHeight: 300 }}>
               <Image src={imageUrl} alt={product.name} fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ padding: '1rem' }}>
