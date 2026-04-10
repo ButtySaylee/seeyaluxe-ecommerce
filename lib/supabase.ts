@@ -8,7 +8,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export type Product = {
   id: string;
   name: string;
-  category: 'earrings' | 'footwear' | 'bags';
+  category: 'earrings' | 'footwear' | 'bags' | 'other';
   price: number;
   description: string;
   images: string[];
