@@ -39,20 +39,11 @@ export default function PromoBanner() {
         letterSpacing: '1px',
         animation: 'promoPulse 2s ease infinite',
         display: 'inline-block',
-      }}>10% OFF EVERYTHING</strong>
+      }}>NEW SEASON LUXURY COLLECTION</strong>
       <span style={{ margin: '0 0.8rem', opacity: 0.6 }}>|</span>
-      <span style={{ letterSpacing: '0.5px' }}>Limited time&nbsp;·&nbsp;</span>
-      <strong style={{ color: '#ffd700', letterSpacing: '0.5px' }}>15th – 20th March</strong>
+      <span style={{ letterSpacing: '0.5px' }}>Handpicked statement styles now live</span>
       <span style={{ margin: '0 0.8rem', opacity: 0.6 }}>|</span>
-      <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>Use code&nbsp;</span>
-      <strong style={{
-        background: 'white',
-        color: '#6b2d6b',
-        padding: '0.15rem 0.5rem',
-        borderRadius: '3px',
-        letterSpacing: '1px',
-        fontSize: '0.85rem',
-      }}>LUXE10</strong>
+      <strong style={{ color: '#ffd700', letterSpacing: '0.5px', fontSize: '0.9rem' }}>Elevate every look with SeeYa Luxe</strong>
       <span style={{ marginLeft: '0.8rem', fontSize: '1rem' }}>👑</span>
     </div>
   );
