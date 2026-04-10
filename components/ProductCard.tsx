@@ -97,11 +97,35 @@ export default function ProductCard({ product }: Props) {
           <div onClick={() => setQuickView(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', zIndex: 3000 }} />
           <div style={{
             position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-            background: 'white', maxWidth: 900, width: '90vw', maxHeight: '90vh', overflowY: 'auto',
-            zIndex: 3001, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', padding: '2rem',
+            background: 'white', maxWidth: 900, width: '92vw', maxHeight: '90vh', overflowY: 'auto',
+            zIndex: 3001, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(1rem, 3vw, 2rem)', padding: 'clamp(1rem, 3vw, 2rem)',
           }}>
-            <button onClick={() => setQuickView(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', fontSize: '2rem', cursor: 'pointer', color: 'var(--primary-dark)', lineHeight: 1 }}>&times;</button>
-            <div style={{ position: 'relative', minHeight: 300 }}>
+            <button
+              onClick={() => setQuickView(false)}
+              aria-label="Close quick view"
+              style={{
+                position: 'absolute',
+                top: 'max(0.75rem, env(safe-area-inset-top))',
+                right: '0.75rem',
+                width: 44,
+                height: 44,
+                borderRadius: '999px',
+                background: 'rgba(26,10,26,0.92)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                fontSize: '1.9rem',
+                cursor: 'pointer',
+                color: 'white',
+                lineHeight: 1,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 5,
+                boxShadow: '0 8px 20px rgba(0,0,0,0.35)',
+              }}
+            >
+              &times;
+            </button>
+            <div style={{ position: 'relative', minHeight: 300, aspectRatio: '4 / 5' }}>
               <Image src={imageUrl} alt={product.name} fill style={{ objectFit: 'cover' }} />
             </div>
             <div style={{ padding: '1rem' }}>
